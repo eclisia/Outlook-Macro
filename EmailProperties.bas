@@ -162,6 +162,12 @@ End Sub
 
 
 Public Sub getMailFolder()
+' Version 02 :
+' Modification date : 23/08/2017
+' adding of code to check if more than one mail is selected.
+' If yes, so the sub is aborted. Else, the sub run.
+
+
 'Definition of the object
     Dim oMail As MailItem
     Dim myFolder As MAPIFolder
@@ -180,6 +186,12 @@ Public Sub getMailFolder()
     Set Expl = Outlook.ActiveExplorer
     Set sel = Expl.Selection
     Set myObject = Application.ActiveWindow
+    
+    'Check if more than one item is selected.
+    If sel.Count > 1 Then
+        Debug.Print "More than one e-mail selected, so the sub is aborted"
+        Exit Sub
+    End If
 
 
 'Loop for each item (mail) of the selection
